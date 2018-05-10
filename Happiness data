@@ -1,0 +1,12 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("/Users/123/Desktop/2015.csv"
+print(df.head())
+print(df.shape)
+df.info()
+
+sns.barplot(x="Happiness Rank",y="Health (Life Expectancy)",data= df)
+sns.boxplot(x = "Economy (GDP per Capita)", y = "Happiness Rank", data = df)
