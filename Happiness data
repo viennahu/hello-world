@@ -8,5 +8,15 @@ print(df.head())
 print(df.shape)
 df.info()
 
+df['Happiness Score'].describe()
+sns.distplot(df['Happiness Score'])
+
+df.drop(columns=['Standard Error', 'Happiness Rank','Dystopia Residual'])
+df.head()
+
+corrmat = df.corr()
+f, ax = plt.subplots(figsize=(12, 10))
+sns.heatmap(corrmat, vmax=.8, square=True)
+
 sns.barplot(x="Happiness Rank",y="Health (Life Expectancy)",data= df)
 sns.boxplot(x = "Economy (GDP per Capita)", y = "Happiness Rank", data = df)
