@@ -1,0 +1,1814 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Happiness Data Exploratory Analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsubsection{Stats131}\label{stats131}
+
+\begin{itemize}
+\tightlist
+\item
+  Chenhui Hu
+\item
+  Yongtong Tan
+\item
+  Longyin Poon
+\end{itemize}
+
+\section{Happiness Data context and description of the
+data}\label{happiness-data-context-and-description-of-the-data}
+
+\subsubsection{Background information on the subject and field of
+study：}\label{background-information-on-the-subject-and-field-of-study}
+
+\begin{itemize}
+\tightlist
+\item
+  The data, World Happiness Report, explores the happiness scores and
+  rankings by country. The scores are based on answers to the main life
+  evaluation question asked in the poll. In this data, we have total of
+  158 rows represent 158 countries. The columns following the happiness
+  score estimate the extent to which each of six factors- economic
+  production, social support(Family), life expectancy(Health), freedom,
+  absence of corruption(Trust), and generosity- contribute to making
+  life evaluations higher in each country than they are in Dystopia, a
+  hypothetical country that has values equal to the world's lowest
+  national averages for each of the six factors. These columns also
+  describe the extent to which these factors contribute in evaluating
+  the happiness in each country. The Dystopia Residual metric actually
+  is the Dystopia Happiness Score(1.85) + the Residual value or the
+  unexplained value for each country as stated in the previous answer.
+  If you add all these factors up, you get the happiness score. The
+  report continues to gain global recognition as governments,
+  organizations and civil society increasingly use happiness indicators
+  to inform their policy-making decisions. Leading experts across fields
+  -- economics, psychology, survey analysis, national statistics,
+  health, public policy and more -- describe how measurements of
+  well-being can be used effectively to assess the progress of nations.
+  The reports review the state of happiness in the world today and show
+  how the new science of happiness explains personal and national
+  variations in happiness.
+\end{itemize}
+
+\subsubsection{Information about data collection
+:}\label{information-about-data-collection}
+
+\begin{itemize}
+\item
+  The data was collected by the Gallup World Poll, who track and analyze
+  crucial world issues affecting lives of people. And it was released at
+  United Nations. The world happiness dataset we used was collected in
+  2015 and 2016 individually. Data were collected from people in over
+  150 countries. The typical survey includes at least 1,000 individuals.
+  In some countries, Gallup collects oversamples in major cities or
+  areas of special interest. For large countries, such as China and
+  Russia, larger sample sizes would be assigned to these counties.
+\item
+  Respondents were required to think and answer their feelings toward
+  happiness running from 0 to 10. The scores are based on answer to the
+  main life evaluation questions asked in the poll. Each variable
+  measured reveals a spopulated-weighted average score and is tracked
+  over time and compared against other countries.
+\item
+  Gallup uses telephone surveys in countries where telephone coverage
+  represents at least 80\% of the population or is the customary survey
+  methodology. In countries where telephone interviewing is employed,
+  Gallup uses a random-digit-dial method or a nationally representative
+  list of phone numbers. In the developing world, Gallup uses an area
+  frame design for face-to-face interviewing in randomly selected
+  households. While telephone interviews are about 30 minutes,
+  face-to-face interviews are approximately one hour.
+\item
+  First, Gallup selects the Primary Sampling Units (PSUs). Sample
+  selection is based on probabilities proportional to population size;
+  otherwise, Gallup uses simple random sampling. Gallup makes at least
+  three attempts to reach a person in each household. Then, Gallup uses
+  random-route procedures to select sampled households. If the
+  interviewer cannot obtain an interview at the initial sampled
+  household, he or she uses a simple substitution method. Finally, they
+  select respondents. In face-to-face and telephone methodologies,
+  random respondent selection is achieved by using either the latest
+  birthday or Kish grid method.
+\item
+  However, some staticians argue that these surveys depend on subjective
+  self-reporting, not to mention eliding cultural differences.
+\end{itemize}
+
+    \section{Happiness Data Exploratory
+Analysis}\label{happiness-data-exploratory-analysis}
+
+\paragraph{Load standard libraries}\label{load-standard-libraries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{,} \PY{n}{cross\PYZus{}val\PYZus{}score}
+\end{Verbatim}
+
+
+    \section{Data Overview}\label{data-overview}
+
+\paragraph{Load data}\label{load-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2015.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subparagraph{Set country name as
+index}\label{set-country-name-as-index}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{df}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 158 entries, Switzerland to Togo
+Data columns (total 11 columns):
+Region                           158 non-null object
+Happiness Rank                   158 non-null int64
+Happiness Score                  158 non-null float64
+Standard Error                   158 non-null float64
+Economy (GDP per Capita)         158 non-null float64
+Family                           158 non-null float64
+Health (Life Expectancy)         158 non-null float64
+Freedom                          158 non-null float64
+Trust (Government Corruption)    158 non-null float64
+Generosity                       158 non-null float64
+Dystopia Residual                158 non-null float64
+dtypes: float64(9), int64(1), object(1)
+memory usage: 14.8+ KB
+
+    \end{Verbatim}
+
+    \paragraph{What countries have the highest happiness score and which
+region they belongs
+to?}\label{what-countries-have-the-highest-happiness-score-and-which-region-they-belongs-to}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}                      Region  Happiness Rank  Happiness Score  Standard Error  \textbackslash{}
+        Country                                                                        
+        Switzerland  Western Europe               1            7.587         0.03411   
+        Iceland      Western Europe               2            7.561         0.04884   
+        Denmark      Western Europe               3            7.527         0.03328   
+        Norway       Western Europe               4            7.522         0.03880   
+        Canada        North America               5            7.427         0.03553   
+        
+                     Economy (GDP per Capita)   Family  Health (Life Expectancy)  \textbackslash{}
+        Country                                                                    
+        Switzerland                   1.39651  1.34951                   0.94143   
+        Iceland                       1.30232  1.40223                   0.94784   
+        Denmark                       1.32548  1.36058                   0.87464   
+        Norway                        1.45900  1.33095                   0.88521   
+        Canada                        1.32629  1.32261                   0.90563   
+        
+                     Freedom  Trust (Government Corruption)  Generosity  \textbackslash{}
+        Country                                                           
+        Switzerland  0.66557                        0.41978     0.29678   
+        Iceland      0.62877                        0.14145     0.43630   
+        Denmark      0.64938                        0.48357     0.34139   
+        Norway       0.66973                        0.36503     0.34699   
+        Canada       0.63297                        0.32957     0.45811   
+        
+                     Dystopia Residual  
+        Country                         
+        Switzerland            2.51738  
+        Iceland                2.70201  
+        Denmark                2.49204  
+        Norway                 2.46531  
+        Canada                 2.45176  
+\end{Verbatim}
+            
+    Switzerland has the highest happiness score following by Iceland,
+Denmark, Norway and Canada. The top four countries all came from Western
+Europe and Canada belongs to North America.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(158, 11)
+
+    \end{Verbatim}
+
+    \paragraph{The data has 158 rows and 11 columns. Each row represents a
+country and each column contains information about the countries. The
+key variables that influence Happiness Score
+are:}\label{the-data-has-158-rows-and-11-columns.-each-row-represents-a-country-and-each-column-contains-information-about-the-countries.-the-key-variables-that-influence-happiness-score-are}
+
+\begin{itemize}
+\tightlist
+\item
+  Economy (GDP per Capita)
+\item
+  Family
+\item
+  Health (Life Expectancy)
+\item
+  Freedom
+\item
+  Trust (Government Corruption)
+\item
+  Generosity.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{key\PYZus{}variables} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Economy (GDP per Capita)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Family}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Health (Life Expectancy)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trust (Government Corruption)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Generosity}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{]}
+        \PY{n}{df}\PY{p}{[}\PY{n}{key\PYZus{}variables}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:}              Happiness Score  Economy (GDP per Capita)   Family  \textbackslash{}
+        Country                                                           
+        Switzerland            7.587                   1.39651  1.34951   
+        Iceland                7.561                   1.30232  1.40223   
+        Denmark                7.527                   1.32548  1.36058   
+        Norway                 7.522                   1.45900  1.33095   
+        Canada                 7.427                   1.32629  1.32261   
+        
+                     Health (Life Expectancy)  Freedom  Trust (Government Corruption)  \textbackslash{}
+        Country                                                                         
+        Switzerland                   0.94143  0.66557                        0.41978   
+        Iceland                       0.94784  0.62877                        0.14145   
+        Denmark                       0.87464  0.64938                        0.48357   
+        Norway                        0.88521  0.66973                        0.36503   
+        Canada                        0.90563  0.63297                        0.32957   
+        
+                     Generosity  
+        Country                  
+        Switzerland     0.29678  
+        Iceland         0.43630  
+        Denmark         0.34139  
+        Norway          0.34699  
+        Canada          0.45811  
+\end{Verbatim}
+            
+    \section{Exploratory Analysis}\label{exploratory-analysis}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{p}{[}\PY{n}{key\PYZus{}variables}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}        Happiness Score  Economy (GDP per Capita)      Family  \textbackslash{}
+        count       158.000000                158.000000  158.000000   
+        mean          5.375734                  0.846137    0.991046   
+        std           1.145010                  0.403121    0.272369   
+        min           2.839000                  0.000000    0.000000   
+        25\%           4.526000                  0.545808    0.856823   
+        50\%           5.232500                  0.910245    1.029510   
+        75\%           6.243750                  1.158448    1.214405   
+        max           7.587000                  1.690420    1.402230   
+        
+               Health (Life Expectancy)     Freedom  Trust (Government Corruption)  \textbackslash{}
+        count                158.000000  158.000000                     158.000000   
+        mean                   0.630259    0.428615                       0.143422   
+        std                    0.247078    0.150693                       0.120034   
+        min                    0.000000    0.000000                       0.000000   
+        25\%                    0.439185    0.328330                       0.061675   
+        50\%                    0.696705    0.435515                       0.107220   
+        75\%                    0.811013    0.549092                       0.180255   
+        max                    1.025250    0.669730                       0.551910   
+        
+               Generosity  
+        count  158.000000  
+        mean     0.237296  
+        std      0.126685  
+        min      0.000000  
+        25\%      0.150553  
+        50\%      0.216130  
+        75\%      0.309883  
+        max      0.795880  
+\end{Verbatim}
+            
+    \subsubsection{Pairwise Scatterplot}\label{pairwise-scatterplot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{key\PYZus{}variables}\PY{p}{]}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mf}{2.5}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the pairwise scatterplot, we observed that Happiness Score and
+Economic (GDP Per Capita) has the strongest positive linear
+relationship. The distributions of Family, Health (Life Expectancy) and
+Freedom also have a relatively strong positive correlation with
+Happiness Score. Notice that the distributions of Economic (GDP Per
+Capita), Family, Health (Life Expectancy) and Freedom are left skewed
+while Trust (Government Corruption) and Generousity are right skewed.
+
+    \subsubsection{Correlation Plot}\label{correlation-plot}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{corrmat} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{key\PYZus{}variables}\PY{p}{]}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{corrmat}\PY{p}{)}
+        \PY{n}{ax}\PY{p}{,} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{corrmat}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation Plot of Variables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+                               Happiness Score  Economy (GDP per Capita)  \textbackslash{}
+Happiness Score                       1.000000                  0.780966   
+Economy (GDP per Capita)              0.780966                  1.000000   
+Family                                0.740605                  0.645299   
+Health (Life Expectancy)              0.724200                  0.816478   
+Freedom                               0.568211                  0.370300   
+Trust (Government Corruption)         0.395199                  0.307885   
+Generosity                            0.180319                 -0.010465   
+
+                                 Family  Health (Life Expectancy)   Freedom  \textbackslash{}
+Happiness Score                0.740605                  0.724200  0.568211   
+Economy (GDP per Capita)       0.645299                  0.816478  0.370300   
+Family                         1.000000                  0.531104  0.441518   
+Health (Life Expectancy)       0.531104                  1.000000  0.360477   
+Freedom                        0.441518                  0.360477  1.000000   
+Trust (Government Corruption)  0.205605                  0.248335  0.493524   
+Generosity                     0.087513                  0.108335  0.373916   
+
+                               Trust (Government Corruption)  Generosity  
+Happiness Score                                     0.395199    0.180319  
+Economy (GDP per Capita)                            0.307885   -0.010465  
+Family                                              0.205605    0.087513  
+Health (Life Expectancy)                            0.248335    0.108335  
+Freedom                                             0.493524    0.373916  
+Trust (Government Corruption)                       1.000000    0.276123  
+Generosity                                          0.276123    1.000000  
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Happiness Score has the highest correlation ( r = 0.781 ) with Economic
+(GDP per Capita). It also has strong correlation with Family and Health
+(Life Expectancy). Note that Economy (GDP per Capita) and Health (Life
+Expectancy) has high correlation with each other so we need to be aware
+of multicolinearity when running regression model. Freedom and Happiness
+Score are somewhat correlated ( r = 0.568 ), and Freedom itself has very
+little correlation with other variables.
+
+    \subsubsection{What are the distributions of the independent variables
+look
+like?}\label{what-are-the-distributions-of-the-independent-variables-look-like}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{predictors} \PY{o}{=} \PY{p}{[}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Economy (GDP per Capita)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Family}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Health (Life Expectancy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Freedom}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trust (Government Corruption)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+          \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Generosity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ax}\PY{p}{,} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{n}{predictors}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Boxplot of Potential Factors for Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Boxplot shows that Economy has the most variation and Trust (Government
+Corruption) has the least variation among all countries.
+
+    \subsubsection{What is the distribution of Happiness
+Score?}\label{what-is-the-distribution-of-happiness-score}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{ax}\PY{p}{,} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Distribution Plot of Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The distribution plot shows that Happiness Score is approximately
+normally distributed
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+count    158.000000
+mean       5.375734
+std        1.145010
+min        2.839000
+25\%        4.526000
+50\%        5.232500
+75\%        6.243750
+max        7.587000
+Name: Happiness Score, dtype: float64
+
+    \end{Verbatim}
+
+    The summary shows that average Happiness Score is about 5.38 with a
+standard deviation of 1.15. The Maximum is 7.587 and the minimum is
+2.839.
+
+    \subsubsection{What is the Happiest country in the world and where it
+locates?}\label{what-is-the-happiest-country-in-the-world-and-where-it-locates}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{max}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}                      Region  Happiness Rank  Happiness Score  Standard Error  \textbackslash{}
+         Country                                                                        
+         Switzerland  Western Europe               1            7.587         0.03411   
+         
+                      Economy (GDP per Capita)   Family  Health (Life Expectancy)  \textbackslash{}
+         Country                                                                    
+         Switzerland                   1.39651  1.34951                   0.94143   
+         
+                      Freedom  Trust (Government Corruption)  Generosity  \textbackslash{}
+         Country                                                           
+         Switzerland  0.66557                        0.41978     0.29678   
+         
+                      Dystopia Residual  
+         Country                         
+         Switzerland            2.51738  
+\end{Verbatim}
+            
+    Switzerland is the happiest country in the world and it belongs to
+Western Europe.
+
+    \subsubsection{What is the Unhappiest country in the world and where it
+locates?}\label{what-is-the-unhappiest-country-in-the-world-and-where-it-locates}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{n+nb}{min}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Happiness Score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}                      Region  Happiness Rank  Happiness Score  Standard Error  \textbackslash{}
+         Country                                                                        
+         Togo     Sub-Saharan Africa             158            2.839         0.06727   
+         
+                  Economy (GDP per Capita)   Family  Health (Life Expectancy)  Freedom  \textbackslash{}
+         Country                                                                         
+         Togo                      0.20868  0.13995                   0.28443  0.36453   
+         
+                  Trust (Government Corruption)  Generosity  Dystopia Residual  
+         Country                                                                
+         Togo                           0.10731     0.16681            1.56726  
+\end{Verbatim}
+            
+    Togo is the happiest country in the world and it belongs to Sub-Saharan
+Africa.
+
+    \subsubsection{Regroup Region into 6 Continents for better
+visualization}\label{regroup-region-into-6-continents-for-better-visualization}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Continents}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} Group Europe Together}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Western Europe}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Europe}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Central and Eastern Europe}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Europe}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} Group Asis Together        }
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Southern Asia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Asia}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Southeastern Asia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Asia}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Eastern Asia}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Asia}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} Group Africa Together}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Middle East and Northern Africa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Africa}\PY{l+s+s2}{\PYZdq{}}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sub\PYZhy{}Saharan Africa}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Africa}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} Rename Latin America and Caribbean to South America        }
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Latin America and Caribbean}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{South America}\PY{l+s+s2}{\PYZdq{}}
+         \PY{c+c1}{\PYZsh{} Rename Australia and New Zealand to Oceania}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{158}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Australia and New Zealand}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+                 \PY{n}{df}\PY{o}{.}\PY{n}{Continents}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Oceania}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:5: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  """
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:8: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:12: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  if sys.path[0] == '':
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:15: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  from ipykernel import kernelapp as app
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:18: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:22: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:25: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:29: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:33: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+
+    \end{Verbatim}
+
+    \subsubsection{Does Continent the country locates affect Happiness Score
+and Economy (GDP per
+Capita)?}\label{does-continent-the-country-locates-affect-happiness-score-and-economy-gdp-per-capita}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Economy (GDP per Capita)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{hue} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{fit\PYZus{}reg} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score Against Economy (GDP per Capita)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{residplot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Economy (GDP per Capita)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Residual Plot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see, Happiness Score and Economy (GDP per Capita) are
+positively correlated and the relationship is somewhat linear. The
+residuals are fairly random distributed as well. In addition, Majority
+of African countries have low Happiness Score and Economy Size while
+Majority of European, Oceania and North American countries have high
+Happiness Score and Economy Size.
+
+    \subsubsection{How Happiness Scores differ acorss
+Regions?}\label{how-happiness-scores-differ-acorss-regions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{ax}\PY{p}{,} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{swarmplot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Region
+Australia and New Zealand          7.285000
+North America                      7.273000
+Western Europe                     6.689619
+Latin America and Caribbean        6.144682
+Eastern Asia                       5.626167
+Middle East and Northern Africa    5.406900
+Central and Eastern Europe         5.332931
+Southeastern Asia                  5.317444
+Southern Asia                      4.580857
+Sub-Saharan Africa                 4.202800
+Name: Happiness Score, dtype: float64
+
+    \end{Verbatim}
+
+    From the swarmplot and statistics, we see that Austrialia and New
+Zealand, North America and Western Europe have the highest Happiness
+Score while Sub-Saharan Africa has the lowest.
+
+    \subsubsection{Explore the relationships between Happiness Score, Life
+Expectancy and Economy by
+Continents}\label{explore-the-relationships-between-happiness-score-life-expectancy-and-economy-by-continents}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Economy (GDP per Capita)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)} \PY{o}{*} \PY{l+m+mi}{3000} \PY{c+c1}{\PYZsh{} Create an array for economy size}
+         \PY{n}{continents} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{continents} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Categorical}\PY{o}{.}\PY{n}{from\PYZus{}array}\PY{p}{(}\PY{n}{continents}\PY{p}{)}\PY{o}{.}\PY{n}{labels} \PY{c+c1}{\PYZsh{} Convert string actor to numeric values}
+         \PY{n}{colors} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{g}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{m}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{y}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gold}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pink}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{maroon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{steelblue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lightseagreen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{c} \PY{o}{=} \PY{n}{colors}\PY{p}{[}\PY{n}{continents}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:3: FutureWarning: Categorical.from\_array is deprecated, use Categorical instead
+  This is separate from the ipykernel package so we can avoid doing imports until
+/Users/Michael/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:3: FutureWarning: 'labels' is deprecated. Use 'codes' instead
+  This is separate from the ipykernel package so we can avoid doing imports until
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{ax}\PY{p}{,} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Health (Life Expectancy)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{n}{size}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{n}{c}\PY{p}{,}\PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relationship between Health, Economy, Continent and Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Health (Life Expectancy)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The size of the bubble represents the economy size of individual
+country. The color represents the continent the individual country
+belongs to. From the bubble plot, we observed that bubbles' sizes are
+larger in the upper right corner and many red bubbles in the lower left
+corner. Since red represents Africa, it indicates that African countries
+have the lowest Life Expectancy, Economy and Happiness Score on average.
+In addition, larger economy and life expectancy contribute to higher
+Happiness Score for many countries.
+
+    \subsubsection{Does freedom to make life choices in a country impacts
+Happiness
+Score?}\label{does-freedom-to-make-life-choices-in-a-country-impacts-happiness-score}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{lmplot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=}\PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom Against Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Scatterplot shows a positive correlation between the two but the
+relationship was not as strong as Economy and Happiness Score.
+
+    \subsubsection{Which continent has the highest freedom
+score?}\label{which-continent-has-the-highest-freedom-score}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{swarmplot}\PY{p}{(}\PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom Score across Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Freedom}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Continents
+Oceania          0.645310
+North America    0.589505
+South America    0.501740
+Asia             0.472829
+Europe           0.438765
+Africa           0.364546
+Name: Freedom, dtype: float64
+
+    \end{Verbatim}
+
+    Africa has the lowest freedom score on average and Oceania has the
+highest across all continents in the world. People should consider live
+in Oceania or North America and stay away from Africa if they
+appreciates more freedom in their life.
+
+    \subsubsection{Which countries have the highest freedom in the
+world?}\label{which-countries-have-the-highest-freedom-in-the-world}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{df}\PY{o}{.}\PY{n}{Freedom}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} Country
+         Norway         0.66973
+         Switzerland    0.66557
+         Cambodia       0.66246
+         Sweden         0.65980
+         Uzbekistan     0.65821
+         Name: Freedom, dtype: float64
+\end{Verbatim}
+            
+    Norway has the most freedom following by Switzerland, Cambodia, Sweden
+and Uzbekistan.
+
+    \subsubsection{Which countries have the least freedom in the
+world?}\label{which-countries-have-the-least-freedom-in-the-world}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{df}\PY{o}{.}\PY{n}{Freedom}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} Country
+         Iraq                      0.00000
+         Greece                    0.07699
+         Bosnia and Herzegovina    0.09245
+         Sudan                     0.10081
+         Angola                    0.10384
+         Name: Freedom, dtype: float64
+\end{Verbatim}
+            
+    People should stay away from Iraq, Greece, Bosnia and Herzegovina, Sudan
+and Angola if they value freedom in their life.
+
+    \subsubsection{Does social support differs across all continents on
+average?}\label{does-social-support-differs-across-all-continents-on-average}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{swarmplot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Family}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Social Support across Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Family}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Continents
+Oceania          1.314450
+North America    1.284860
+Europe           1.134631
+South America    1.104720
+Asia             0.889910
+Africa           0.846220
+Name: Family, dtype: float64
+
+    \end{Verbatim}
+
+    Again, Africa has the lowest social support on average and Oceania has
+the most across all continents in the world. People should consider live
+in Oceania or North America and stay away from Africa if they are
+looking for social support to make their life happier.
+
+    \subsubsection{What are the top and botton 5 countries in social
+support?}\label{what-are-the-top-and-botton-5-countries-in-social-support}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Family}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Family}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Country
+Central African Republic    0.00000
+Togo                        0.13995
+Afghanistan                 0.30285
+Benin                       0.35386
+India                       0.38174
+Name: Family, dtype: float64
+Country
+Iceland        1.40223
+Ireland        1.36948
+Denmark        1.36058
+Switzerland    1.34951
+Uzbekistan     1.34043
+Name: Family, dtype: float64
+
+    \end{Verbatim}
+
+    Central African Republic has the least social support and Iceland has
+the most in the world.
+
+    \subsubsection{How government trust differs across all continents on
+average?}\label{how-government-trust-differs-across-all-continents-on-average}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{swarmplot}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trust (Government Corruption)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{df}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Social Support across Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Continents}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trust (Government Corruption)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Continents
+Oceania          0.392795
+North America    0.244235
+Europe           0.147485
+Africa           0.143152
+Asia             0.129336
+South America    0.117172
+Name: Trust (Government Corruption), dtype: float64
+
+    \end{Verbatim}
+
+    South American citizens have the least trust to their government
+following by Asia. Oceania once against is the highest in this category.
+
+    \subsubsection{What are the top and botton 5 countries in terms of
+government
+trust?}\label{what-are-the-top-and-botton-5-countries-in-terms-of-government-trust}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trust (Government Corruption)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Trust (Government Corruption)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Country
+Indonesia                 0.00000
+Bosnia and Herzegovina    0.00227
+Romania                   0.00649
+Bulgaria                  0.00872
+Lithuania                 0.01031
+Name: Trust (Government Corruption), dtype: float64
+Country
+Rwanda       0.55191
+Qatar        0.52208
+Singapore    0.49210
+Denmark      0.48357
+Sweden       0.43844
+Name: Trust (Government Corruption), dtype: float64
+
+    \end{Verbatim}
+
+    Indonesia citizens have the lowest trust to their government. Rwanda
+citizens have the highest trust to their government in the world.
+
+    \section{Modeling}\label{modeling}
+
+\subsection{Multiple Linear regression
+Model}\label{multiple-linear-regression-model}
+
+From substantial exploratory analysis, we found that Economy (GDP per
+Capita), Family, Health (Life Expectancy) and Freedom are potential
+variables to predict Happiness Score. Now, we build a multiple linear
+regression for future prediction.
+
+    \subsection{Split 2015 data to training and
+testing}\label{split-2015-data-to-training-and-testing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} Create predictors matrix X and one\PYZhy{}dimensional array response Y}
+         \PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{Y}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(158, 6)
+(158,)
+
+    \end{Verbatim}
+
+    \subsection{Full model with all six
+predictors:}\label{full-model-with-all-six-predictors}
+
+\begin{itemize}
+\tightlist
+\item
+  Economy
+\item
+  Health
+\item
+  Family
+\item
+  Freedom
+\item
+  Trust
+\item
+  Generosity
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(126, 6)
+(32, 6)
+(126,)
+(32,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.78}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.76}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.7788420871167523
+0.7571057958032001
+
+    \end{Verbatim}
+
+    Training R-squared is about 78\% and testing R-squared is about 76\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{predicted\PYZus{}value} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{predicted\PYZus{}value}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Against Actual Happiness Scores}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_83_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The scatterplot shows that predicted values and actua values are close
+to each other.
+
+    \subsubsection{Check Assumptions}\label{check-assumptions}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{residuals} \PY{o}{=} \PY{n}{predicted\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}test}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{residuals}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Close to zero}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.15620572885824052
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Full Model Residuals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_87_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The residuals are randomly distributed and the mean is close to zero.
+The training R-squared is 0.78 and testing R-Squared is 0.76. Therefore
+the model met the assumptions and have moderately high prediction
+accuracy.
+
+    \subsection{Subsetted model with only three
+predictors:}\label{subsetted-model-with-only-three-predictors}
+
+\begin{itemize}
+\tightlist
+\item
+  Economy
+\item
+  Family
+\item
+  Freedom
+\item
+  We remove trust and genorosity because they are the least significant
+  predictors
+\item
+  We also take health out to avoid multicollinearity because it is
+  highly correlated with economy
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{X1} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]} \PY{c+c1}{\PYZsh{} Subset to only the important predictors}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(126, 3)
+(32, 3)
+(126,)
+(32,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.76}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.72}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.7602991362631111
+0.7191553947601972
+
+    \end{Verbatim}
+
+    Training R-squared is about 76\% and testing R-squared is about 72\%.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{predicted\PYZus{}value} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{predicted\PYZus{}value}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Against Actual Happiness Scores}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual Values}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_93_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The scatterplot shows that predicted values and actua values are close
+to each other. \#\#\# Check Assumptions
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{residuals} \PY{o}{=} \PY{n}{predicted\PYZus{}value} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}test}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{residuals}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Close to zero}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.17459892585456804
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subsetted Model Residuals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_96_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The residuals are randomly distributed and the mean is close to zero.
+The training R-squared is 0.76 and testing R-Squared is 0.72. Therefore
+the model met the assumptions and have moderately high prediction
+accuracy.
+
+\subsubsection{Even though the full model give us slightly lower
+training and testing MSE, we would recommand the subsetted model because
+it significantly reduce the cost of collecting additional data. We will
+further examine their prediction accuracies using 2015 data as training
+and 2016 as
+testing.}\label{even-though-the-full-model-give-us-slightly-lower-training-and-testing-mse-we-would-recommand-the-subsetted-model-because-it-significantly-reduce-the-cost-of-collecting-additional-data.-we-will-further-examine-their-prediction-accuracies-using-2015-data-as-training-and-2016-as-testing.}
+
+    \section{Prediction}\label{prediction}
+
+\subsubsection{Make Prediction to 2016 Happiness Data using Full Linear
+Model}\label{make-prediction-to-2016-happiness-data-using-full-linear-model}
+
+\subsubsection{Full Model}\label{full-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n}{df2016} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2016.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df2016}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{df2016}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:}                      Region  Happiness Rank  Happiness Score  \textbackslash{}
+         Country                                                        
+         Denmark      Western Europe               1            7.526   
+         Switzerland  Western Europe               2            7.509   
+         Iceland      Western Europe               3            7.501   
+         Norway       Western Europe               4            7.498   
+         Finland      Western Europe               5            7.413   
+         
+                      Lower Confidence Interval  Upper Confidence Interval  \textbackslash{}
+         Country                                                             
+         Denmark                          7.460                      7.592   
+         Switzerland                      7.428                      7.590   
+         Iceland                          7.333                      7.669   
+         Norway                           7.421                      7.575   
+         Finland                          7.351                      7.475   
+         
+                      Economy (GDP per Capita)   Family  Health (Life Expectancy)  \textbackslash{}
+         Country                                                                    
+         Denmark                       1.44178  1.16374                   0.79504   
+         Switzerland                   1.52733  1.14524                   0.86303   
+         Iceland                       1.42666  1.18326                   0.86733   
+         Norway                        1.57744  1.12690                   0.79579   
+         Finland                       1.40598  1.13464                   0.81091   
+         
+                      Freedom  Trust (Government Corruption)  Generosity  \textbackslash{}
+         Country                                                           
+         Denmark      0.57941                        0.44453     0.36171   
+         Switzerland  0.58557                        0.41203     0.28083   
+         Iceland      0.56624                        0.14975     0.47678   
+         Norway       0.59609                        0.35776     0.37895   
+         Finland      0.57104                        0.41004     0.25492   
+         
+                      Dystopia Residual  
+         Country                         
+         Denmark                2.73939  
+         Switzerland            2.69463  
+         Iceland                2.83137  
+         Norway                 2.66465  
+         Finland                2.82596  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} Reformat the data for prediction}
+         \PY{n}{Xnew} \PY{o}{=} \PY{n}{df2016}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{:}\PY{l+m+mi}{11}\PY{p}{]}
+         \PY{n}{actual} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{df2016}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Happiness Score}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{c+c1}{\PYZsh{} Build Model}
+         \PY{n}{fullmodel} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fullmodel}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Predicted values}
+         \PY{n}{prediction} \PY{o}{=} \PY{n}{fullmodel}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xnew}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}Predicted Value}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{fullmodel}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.777}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{fullmodel}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{Xnew}\PY{p}{,} \PY{n}{actual} \PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.693}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.7772384894312989
+0.6933205254506978
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{c+c1}{\PYZsh{} Residual Plot}
+         \PY{n}{residuals} \PY{o}{=} \PY{n}{prediction} \PY{o}{\PYZhy{}} \PY{n}{actual}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{residuals}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Close to zero}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Full Model Residuals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.34202410844999837
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_103_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{c+c1}{\PYZsh{} Plot result}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{prediction}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{actual}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Value VS Actual 2016}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_104_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Full Model Testing
+Result}\label{full-model-testing-result}
+
+Training R-squared is about 0.777 and testing R-squared is about 0.693.
+The full model perform decently as we see a somewhat linear relationship
+between predicted values and actual values. The residuals are somewhat
+normally distributed and no significant outlier presented in the plot.
+
+    \subsubsection{Make Prediction to 2016 Happiness Data using Subsetted
+Model}\label{make-prediction-to-2016-happiness-data-using-subsetted-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{Xnew1} \PY{o}{=} \PY{n}{df2016}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Build Model}
+         \PY{n}{model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{Y}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Predicted Value}
+         \PY{n}{prediction} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{Xnew1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} R\PYZhy{}squared}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X1}\PY{p}{,} \PY{n}{Y}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.755}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{Xnew1}\PY{p}{,} \PY{n}{actual}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} R2 = 0.714}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0.754775412636749
+0.7137697841546066
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} Residual Plot}
+         \PY{n}{residuals} \PY{o}{=} \PY{n}{prediction} \PY{o}{\PYZhy{}} \PY{n}{actual}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{residuals}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Close to zero}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{residuals}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{o}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subsetted Model Residuals}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-0.23240338021358806
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_108_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{} Plot result}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{prediction}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{actual}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Value}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Value VS Actual 2016}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_109_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Subsetted Model Testing
+Result}\label{subsetted-model-testing-result}
+
+The testing R-squared is slightly higher than the full model by about
+2\%. This result is significant because including Trust, Health and
+Generosity into our model didn't improve prediction accuracy. We suspect
+the fullmodel overfits the training data. We conclude that higher GDP
+per Capita, family and freedom score contributes to higher Happiness
+Score. Note that residuals are somewhat normally distributed hence the
+assumptions were met. We will be able to accurately predict future
+Happiness Score using just three variables instead of the full set. In
+fact, Gallup World Pull can saves thousands of dollars collecting
+additional data regarding Trust, Health and Generosity for each country
+yet still be able to estimate an accurate Happiness Score for each
+country.
+
+    \subsection{Summary}\label{summary}
+
+\subsubsection{After exploring the happiness data, we get a better
+understanding about how Happiness Scores are calculated and what factors
+contribute the most. We also examined how different variables affect and
+interact with one another. We are now able to predict Happiness Score of
+a country in the future with economy, social support and freedom
+information using linear
+regression.}\label{after-exploring-the-happiness-data-we-get-a-better-understanding-about-how-happiness-scores-are-calculated-and-what-factors-contribute-the-most.-we-also-examined-how-different-variables-affect-and-interact-with-one-another.-we-are-now-able-to-predict-happiness-score-of-a-country-in-the-future-with-economy-social-support-and-freedom-information-using-linear-regression.}
+
+    \subsection{Appendix}\label{appendix}
+
+\paragraph{Table of predicted Happiness Score VS actual Happiness Score
+in
+2016}\label{table-of-predicted-happiness-score-vs-actual-happiness-score-in-2016}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{table} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{prediction}\PY{p}{)}
+         \PY{n}{table}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{df2016}\PY{o}{.}\PY{n}{index}
+         \PY{n}{table}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Predicted Happiness Score 2016}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Actual Happiness Score 2016}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{actual}
+         \PY{n}{table}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}                       Predicted Happiness Score 2016  \textbackslash{}
+         Country                                                
+         Denmark                                     6.709221   
+         Switzerland                                 6.813370   
+         Iceland                                     6.689823   
+         Norway                                      6.877347   
+         Finland                                     6.605256   
+         Canada                                      6.605419   
+         Netherlands                                 6.508415   
+         New Zealand                                 6.613967   
+         Australia                                   6.612854   
+         Sweden                                      6.626064   
+         Israel                                      5.934428   
+         Austria                                     6.546076   
+         United States                               6.459855   
+         Costa Rica                                  5.955418   
+         Puerto Rico                                 6.275528   
+         Germany                                     6.544524   
+         Brazil                                      5.725765   
+         Belgium                                     6.413087   
+         Ireland                                     6.689180   
+         Luxembourg                                  6.835966   
+         Mexico                                      5.276348   
+         Singapore                                   6.418126   
+         United Kingdom                              6.403209   
+         Chile                                       5.673985   
+         Panama                                      5.949806   
+         Argentina                                   5.884303   
+         Czech Republic                              6.006287   
+         United Arab Emirates                        6.464620   
+         Uruguay                                     6.107627   
+         Malta                                       6.382660   
+         {\ldots}                                              {\ldots}   
+         Senegal                                     4.308988   
+         Bulgaria                                    5.245304   
+         Mauritania                                  4.286679   
+         Zimbabwe                                    3.995876   
+         Malawi                                      3.174587   
+         Sudan                                       4.040649   
+         Gabon                                       5.166707   
+         Mali                                        4.183758   
+         Haiti                                       3.168193   
+         Botswana                                    5.606134   
+         Comoros                                     3.553762   
+         Ivory Coast                                 4.377557   
+         Cambodia                                    4.670845   
+         Angola                                      4.140035   
+         Niger                                       3.788333   
+         South Sudan                                 3.235904   
+         Chad                                        3.744630   
+         Burkina Faso                                3.990907   
+         Uganda                                      4.597207   
+         Yemen                                       3.939743   
+         Madagascar                                  3.336547   
+         Tanzania                                    4.364025   
+         Liberia                                     3.384536   
+         Guinea                                      3.384841   
+         Rwanda                                      4.378300   
+         Benin                                       3.507721   
+         Afghanistan                                 3.058467   
+         Togo                                        3.116148   
+         Syria                                       3.430789   
+         Burundi                                     2.565725   
+         
+                               Actual Happiness Score 2016  
+         Country                                            
+         Denmark                                     7.526  
+         Switzerland                                 7.509  
+         Iceland                                     7.501  
+         Norway                                      7.498  
+         Finland                                     7.413  
+         Canada                                      7.404  
+         Netherlands                                 7.339  
+         New Zealand                                 7.334  
+         Australia                                   7.313  
+         Sweden                                      7.291  
+         Israel                                      7.267  
+         Austria                                     7.119  
+         United States                               7.104  
+         Costa Rica                                  7.087  
+         Puerto Rico                                 7.039  
+         Germany                                     6.994  
+         Brazil                                      6.952  
+         Belgium                                     6.929  
+         Ireland                                     6.907  
+         Luxembourg                                  6.871  
+         Mexico                                      6.778  
+         Singapore                                   6.739  
+         United Kingdom                              6.725  
+         Chile                                       6.705  
+         Panama                                      6.701  
+         Argentina                                   6.650  
+         Czech Republic                              6.596  
+         United Arab Emirates                        6.573  
+         Uruguay                                     6.545  
+         Malta                                       6.488  
+         {\ldots}                                           {\ldots}  
+         Senegal                                     4.219  
+         Bulgaria                                    4.217  
+         Mauritania                                  4.201  
+         Zimbabwe                                    4.193  
+         Malawi                                      4.156  
+         Sudan                                       4.139  
+         Gabon                                       4.121  
+         Mali                                        4.073  
+         Haiti                                       4.028  
+         Botswana                                    3.974  
+         Comoros                                     3.956  
+         Ivory Coast                                 3.916  
+         Cambodia                                    3.907  
+         Angola                                      3.866  
+         Niger                                       3.856  
+         South Sudan                                 3.832  
+         Chad                                        3.763  
+         Burkina Faso                                3.739  
+         Uganda                                      3.739  
+         Yemen                                       3.724  
+         Madagascar                                  3.695  
+         Tanzania                                    3.666  
+         Liberia                                     3.622  
+         Guinea                                      3.607  
+         Rwanda                                      3.515  
+         Benin                                       3.484  
+         Afghanistan                                 3.360  
+         Togo                                        3.303  
+         Syria                                       3.069  
+         Burundi                                     2.905  
+         
+         [157 rows x 2 columns]
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
